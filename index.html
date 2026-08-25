@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lakshmi Embroidery Designs</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8f6f1;
+        }
+        
+        header {
+            background: #7b1e3a;
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        
+        header p {
+            margin: 8px 0 0;
+        }
+        
+        .buttons {
+            text-align: center;
+            padding: 15px 10px;
+        }
+        
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 6px;
+            background: #7b1e3a;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background: #a52a50;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            padding: 15px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #fff;
+        }
+        
+        .design-name {
+            font-weight: bold;
+            margin-top: 8px;
+        }
+        
+        .price {
+            color: #7b1e3a;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 6px 0;
+        }
+        
+        .enquiry {
+            display: inline-block;
+            text-decoration: none;
+            background: #25D366;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        #count {
+            text-align: center;
+            font-weight: bold;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Lakshmi Embroidery Designs</h1>
+        <p>Beautiful Embroidery Designs</p>
+    </header>
+
+    <div class="buttons">
+        <button onclick="showAll()">All Designs</button>
+        <button onclick="filterPrice(400)">₹400</button>
+        <button onclick="filterPrice(500)">₹500</button>
+        <button onclick="filterPrice(600)">₹600</button>
+        <button onclick="filterPrice(700)">₹700</button>
+        <button onclick="filterPrice(800)">₹800</button>
+        <button onclick="filterPrice(900)">₹900</button>
+        <button onclick="filterPrice(1000)">₹1000</button>
+        <button onclick="filterPrice(1200)">₹1200</button>
+        <button onclick="filterPrice(1500)">₹1500</button>
+        <button onclick="filterPrice(1600)">₹1600</button>
+        <button onclick="filterPrice(1800)">₹1800</button>
+        <button onclick="filterPrice(2000)">₹2000</button>
+    </div>
+
+    <div id="count"></div>
+
+    <div class="gallery" id="gallery"></div>
+
+    <script src="prices.js"></script>
+
+    <script>
+        const gallery = document.getElementById("gallery");
+        const count = document.getElementById("count");
+
+        function showDesigns(list) {
+
+            gallery.innerHTML = "";
+
+            count.innerText = list.length + " Designs";
+
+            list.forEach(function(design) {
+
+                const card = document.createElement("div");
+                card.className = "card";
+
+                card.innerHTML = `
+            <img src="${design.name}.png"
+     alt="${design.name}"
+     onerror="this.src='${design.name}.jpg'">
+
+            <div class="design-name">
+                ${design.name}
+            </div>
+
+            <div class="price">
+                ₹${design.price}
+            </div>
+
+            
+        `;
+
+                gallery.appendChild(card);
+            });
+        }
+
+        function showAll() {
+            showDesigns(designs);
+        }
+
+        function filterPrice(price) {
+
+            const filtered = designs.filter(function(design) {
+                return design.price == price;
+            });
+
+            showDesigns(filtered);
+        }
+
+        showAll();
+    </script>
+
+</body>
+
+</html>
